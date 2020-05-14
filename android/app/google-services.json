@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "406506066863",
+    "firebase_url": "https://lojaflutter-fcc59.firebaseio.com",
+    "project_id": "lojaflutter-fcc59",
+    "storage_bucket": "lojaflutter-fcc59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406506066863:android:da28d812aa5f3db129555a",
+        "android_client_info": {
+          "package_name": "pedro.com.gerenciadorlojavirtual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406506066863-i6k32v5heslckk92pvou22aufejphf2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA03j8UgJzMo9tuHv3nRyfMUEVlvyIb0FU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406506066863-i6k32v5heslckk92pvou22aufejphf2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406506066863:android:47ecb8fcef8ab9a529555a",
+        "android_client_info": {
+          "package_name": "pedro.com.lojavirtual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406506066863-i6k32v5heslckk92pvou22aufejphf2c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA03j8UgJzMo9tuHv3nRyfMUEVlvyIb0FU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406506066863-i6k32v5heslckk92pvou22aufejphf2c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
