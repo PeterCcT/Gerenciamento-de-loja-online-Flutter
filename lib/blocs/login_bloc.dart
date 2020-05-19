@@ -8,8 +8,8 @@ import 'package:rxdart/rxdart.dart';
 enum LoginState { IDLE, LOADING, SUCCESS, FAIL }
 
 class LoginBloc extends BlocBase with LoginValidator {
-  final _emailController = StreamController<String>.broadcast();
-  final _passController = StreamController<String>.broadcast();
+  final _emailController = BehaviorSubject<String>();
+  final _passController = BehaviorSubject<String>();
   final _stateController = BehaviorSubject<LoginState>();
 
   Stream<String> get outEmail =>
@@ -18,7 +18,7 @@ class LoginBloc extends BlocBase with LoginValidator {
       _passController.stream.transform(validateSenha);
 
   Stream<bool> get outSubmitValid =>
-      Observable.combineLatest2(outEmail, outPassword, (email, pass) => true);
+      Observable.combineLatest2(outEmail, outPassword, (email, pass) => email != '' && pass != '' ? true : null);
 
   Stream<LoginState> get outState => _stateController.stream;
 
@@ -52,8 +52,8 @@ class LoginBloc extends BlocBase with LoginValidator {
   }
 
   void submit() {
-    final email = outEmail.toString();
-    final senha = outPassword.toString();
+    final email = _emailController.value;
+    final senha = _emailController.value;
     _stateController.add(LoginState.LOADING);
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: senha)
