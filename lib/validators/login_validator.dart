@@ -7,7 +7,7 @@ class LoginValidator {
         sink.add(email);
       } else {
         sink.add('');
-        sink.addError('Insira um email válido');
+        sink.addError('Insira uma email válido');
       }
     },
   );

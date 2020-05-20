@@ -17,8 +17,8 @@ class LoginBloc extends BlocBase with LoginValidator {
   Stream<String> get outPassword =>
       _passController.stream.transform(validateSenha);
 
-  Stream<bool> get outSubmitValid =>
-      Observable.combineLatest2(outEmail, outPassword, (email, pass) => email != '' && pass != '' ? true : null);
+  Stream<bool> get outSubmitValid => Observable.combineLatest2(outEmail,
+      outPassword, (email, pass) => email != '' && pass != '' ? true : null);
 
   Stream<LoginState> get outState => _stateController.stream;
 
@@ -32,7 +32,7 @@ class LoginBloc extends BlocBase with LoginValidator {
         FirebaseAuth.instance.onAuthStateChanged.listen((user) async {
       if (user != null) {
         if (await verifyAdm(user)) {
-          _stateController.add(LoginState.SUCCESS);
+           _stateController.add(LoginState.SUCCESS);
         } else {
           FirebaseAuth.instance.signOut();
           _stateController.add(LoginState.FAIL);
@@ -53,7 +53,7 @@ class LoginBloc extends BlocBase with LoginValidator {
 
   void submit() {
     final email = _emailController.value;
-    final senha = _emailController.value;
+    final senha = _passController.value;
     _stateController.add(LoginState.LOADING);
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: senha)
