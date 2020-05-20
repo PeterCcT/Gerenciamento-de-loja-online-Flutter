@@ -3,8 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 
 class UserBloc extends BlocBase {
-  final _userController = BehaviorSubject();
+  final _userController = BehaviorSubject<List>();
   Map<String, Map<String, dynamic>> _users = {};
+  Stream<List> get outUser => _userController.stream;
 
   Firestore _firestore = Firestore.instance;
 
@@ -59,6 +60,23 @@ class UserBloc extends BlocBase {
 
   void _unsubscribeOrdes(String uid) {
     _users[uid]['subscriptionu'].cancel();
+  }
+
+  void onChangedSearch(String pesquisa) {
+    if (pesquisa.trim().isEmpty) {
+      _userController.add(_users.values.toList());
+    } else {
+      _userController.add(_filter(pesquisa.trim()));
+    }
+  }
+
+  List<Map<String, dynamic>> _filter(String pesquisa) {
+    List<Map<String, dynamic>> listaFiltrada =
+        List.from(_users.values.toList());
+    listaFiltrada.retainWhere((user) {
+      return user['nome'].toUpperCase().contains(pesquisa.toUpperCase());
+    });
+    return listaFiltrada;
   }
 
   @override
