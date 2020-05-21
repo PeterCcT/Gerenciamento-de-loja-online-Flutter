@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gerenciadorlojavirtual/screens/produtos_screen.dart';
 
 class CategoriaTile extends StatelessWidget {
   final DocumentSnapshot categoria;
@@ -41,9 +42,14 @@ class CategoriaTile extends StatelessWidget {
                             title: Text('${item.data['title']}'),
                             trailing: Text(
                                 'R\$ ${item.data['preco'].toStringAsFixed(2)}'),
-                                onTap: (){},
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ProdutoScreen(
+                                        categoriaId: categoria.documentID,
+                                        produto: item,
+                                      )));
+                            },
                           );
-                          
                         },
                       ).toList()
                         ..add(
@@ -61,7 +67,11 @@ class CategoriaTile extends StatelessWidget {
                                   color: Colors.purpleAccent,
                                   fontWeight: FontWeight.w500),
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ProdutoScreen(
+                                      categoriaId: categoria.documentID)));
+                            },
                           ),
                         ),
                     );
