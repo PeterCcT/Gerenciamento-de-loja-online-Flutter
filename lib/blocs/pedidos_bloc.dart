@@ -25,7 +25,7 @@ class PedidosBloc extends BlocBase {
             _pedidos.add(pedido.document);
             break;
           case DocumentChangeType.modified:
-            _pedidos.retainWhere((pedido) => pedido.documentID == id);
+            _pedidos.removeWhere((pedido) => pedido.documentID == id);
             _pedidos.add(pedido.document);
             break;
 
