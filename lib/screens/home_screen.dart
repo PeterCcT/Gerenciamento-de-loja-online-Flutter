@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:gerenciadorlojavirtual/blocs/user_bloc.dart';
 import 'package:gerenciadorlojavirtual/tab/pedidos_tab.dart';
+import 'package:gerenciadorlojavirtual/tab/produtos_tab.dart';
 import 'package:gerenciadorlojavirtual/tab/user_tab.dart';
 import 'package:gerenciadorlojavirtual/blocs/pedidos_bloc.dart';
 
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 UserTab(),
                 PedidosTab(),
-                Container(color: Colors.green),
+                ProdutosTab(),
               ],
             ),
           ),
