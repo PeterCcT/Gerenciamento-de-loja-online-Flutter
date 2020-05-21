@@ -2,6 +2,8 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 
+enum CriterioSort { READY_FIRST, READY_LAST }
+
 class PedidosBloc extends BlocBase {
   final _pedidosController = BehaviorSubject<List>();
 
@@ -10,6 +12,8 @@ class PedidosBloc extends BlocBase {
   List<DocumentSnapshot> _pedidos = [];
 
   Stream<List> get outPedidos => _pedidosController.stream;
+
+  CriterioSort _criterio;
 
   PedidosBloc() {
     _addPedidosListener();
@@ -34,8 +38,46 @@ class PedidosBloc extends BlocBase {
             break;
         }
       });
-      _pedidosController.add(_pedidos);
+      _sort();
     });
+  }
+
+  void setCriterioSort(CriterioSort criterioSort) {
+    _criterio = criterioSort;
+
+    _sort();
+  }
+
+  void _sort() {
+    switch (_criterio) {
+      case CriterioSort.READY_FIRST:
+        _pedidos.sort((a, b) {
+          int sA = a.data['Status'];
+          int sB = b.data['Status'];
+
+          if (sA < sB)
+            return 1;
+          else if (sA > sB)
+            return -1;
+          else
+            return 0;
+        });
+        break;
+      case CriterioSort.READY_LAST:
+        _pedidos.sort((a, b) {
+          int sA = a.data['Status'];
+          int sB = b.data['Status'];
+
+          if (sA < sB)
+            return 1;
+          else if (sA < sB)
+            return -1;
+          else
+            return 0;
+        });
+        break;
+    }
+    _pedidosController.add(_pedidos);
   }
 
   @override

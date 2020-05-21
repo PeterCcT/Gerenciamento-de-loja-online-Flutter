@@ -1,5 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:gerenciadorlojavirtual/blocs/user_bloc.dart';
 import 'package:gerenciadorlojavirtual/tab/pedidos_tab.dart';
 import 'package:gerenciadorlojavirtual/tab/user_tab.dart';
@@ -83,6 +84,47 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      floatingActionButton: _buildFloating(),
     );
+  }
+
+  Widget _buildFloating() {
+    switch (_p) {
+      case 0:
+        return null;
+        break;
+      case 1:
+        return SpeedDial(
+          child: Icon(Icons.sort, color: Colors.white),
+          backgroundColor: Colors.purple,
+          overlayOpacity: 0.6,
+          overlayColor: Colors.black,
+          children: [
+            SpeedDialChild(
+                child: Icon(
+                  Icons.arrow_downward,
+                  color: Colors.purpleAccent,
+                ),
+                backgroundColor: Colors.black,
+                label: 'Concluido abaixo',
+                labelStyle: TextStyle(color: Colors.black),
+                onTap: () {
+                  _pedidosBloc.setCriterioSort(CriterioSort.READY_LAST);
+                }),
+            SpeedDialChild(
+                child: Icon(
+                  Icons.arrow_upward,
+                  color: Colors.purpleAccent,
+                ),
+                backgroundColor: Colors.black,
+                label: 'Concluido acima',
+                labelStyle: TextStyle(color: Colors.black),
+                onTap: () {
+                  _pedidosBloc.setCriterioSort(CriterioSort.READY_FIRST);
+                }),
+          ],
+        );
+      default:
+    }
   }
 }
