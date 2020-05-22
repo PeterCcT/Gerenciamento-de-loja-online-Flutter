@@ -59,7 +59,12 @@ class _ProdutoScreenState extends State<ProdutoScreen> {
                   'Imagens',
                   style: TextStyle(color: Colors.white, fontSize: 12),
                 ),
-                ImagesTile(),
+                ImagesTile(
+                  context: context,
+                  initialValue: snapshot.data['images'],
+                  onSaved: (image){},
+                  validator: (l){},
+                ),
                 TextFormField(
                   initialValue: snapshot.data['title'],
                   style: _fieldStyle,

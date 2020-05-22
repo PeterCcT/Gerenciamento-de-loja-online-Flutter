@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciadorlojavirtual/widgets/image_search_sheet.dart';
 
 class ImagesTile extends FormField<List> {
   ImagesTile({
+    BuildContext context,
     FormFieldSetter<List> onSaved,
     FormFieldValidator<List> validator,
     List initialValue,
@@ -41,22 +43,35 @@ class ImagesTile extends FormField<List> {
                               ..add(
                                 GestureDetector(
                                   child: Container(
+                                    color: Colors.white54,
                                     height: 100,
                                     width: 100,
                                     child: Icon(Icons.camera_enhance,
                                         color: Colors.white),
                                   ),
-                                  onTap: (){
-
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) => ImageSearchSheet(
+                                        onImageSelected: (image) {
+                                          state.didChange(
+                                              state.value..add(image));
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    );
                                   },
                                 ),
                               ),
                           ),
                         ),
-                        state.hasError ? Text(
-                           state.errorText,
-                           style: TextStyle(color: Colors.red,fontSize: 12),
-                        ) : Container()
+                        state.hasError
+                            ? Text(
+                                state.errorText,
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 12),
+                              )
+                            : Container()
                       ],
                     )
                   : Container();
