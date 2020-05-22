@@ -16,6 +16,7 @@ class ImagesTile extends FormField<List> {
             builder: (state) {
               return state.value != null
                   ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
                           height: 124,
