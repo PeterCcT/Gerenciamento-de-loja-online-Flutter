@@ -12,8 +12,8 @@ class _ProdutosTabState extends State<ProdutosTab>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return FutureBuilder<QuerySnapshot>(
-      future: Firestore.instance.collection('produtos').getDocuments(),
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('produtos').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(

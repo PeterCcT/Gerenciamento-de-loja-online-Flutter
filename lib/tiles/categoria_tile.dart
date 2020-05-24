@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gerenciadorlojavirtual/screens/produtos_screen.dart';
+import 'package:gerenciadorlojavirtual/widgets/categoria.dialog.dart';
 
 class CategoriaTile extends StatelessWidget {
   final DocumentSnapshot categoria;
@@ -18,9 +19,19 @@ class CategoriaTile extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          leading: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            backgroundImage: NetworkImage(categoria.data['icon']),
+          leading: GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => CategoriaDialog(
+                  categoria: categoria,
+                ),
+              );
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              backgroundImage: NetworkImage(categoria.data['icon']),
+            ),
           ),
           children: <Widget>[
             FutureBuilder(

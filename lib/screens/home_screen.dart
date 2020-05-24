@@ -6,6 +6,7 @@ import 'package:gerenciadorlojavirtual/tab/pedidos_tab.dart';
 import 'package:gerenciadorlojavirtual/tab/produtos_tab.dart';
 import 'package:gerenciadorlojavirtual/tab/user_tab.dart';
 import 'package:gerenciadorlojavirtual/blocs/pedidos_bloc.dart';
+import 'package:gerenciadorlojavirtual/widgets/categoria.dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -125,7 +126,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
           ],
         );
-      default: return Container();
+      case 2:
+        return FloatingActionButton(
+            backgroundColor: Colors.purpleAccent,
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => CategoriaDialog(),
+              );
+            });
+      default:
+        return Container();
     }
   }
 }
